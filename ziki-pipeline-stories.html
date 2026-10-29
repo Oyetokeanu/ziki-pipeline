@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ziki · Agents and Stories</title>
+<style>
+:root{--bg:#f5f6fa;--cd:#fff;--tx:#12162a;--mu:#667085;--bd:#e3e6ee;--pr:#2f5bea;--gr:#0f9d77;--or:#f59e0b;--ob:#fff3d6;--ot:#8a5a00;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d111d;--cd:#161b2b;--tx:#eef1f8;--mu:#9aa3b8;--bd:#262d42;--pr:#6c8cff;--gr:#2dc79a;--ob:#3a2c0b;--ot:#ffd37a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0d111d;--cd:#161b2b;--tx:#eef1f8;--mu:#9aa3b8;--bd:#262d42;--pr:#6c8cff;--gr:#2dc79a;--ob:#3a2c0b;--ot:#ffd37a;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2px solid var(--pr);outline-offset:2px}
+.top{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--cd);border-bottom:1px solid var(--bd);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.logo{font-weight:800;font-size:18px;display:flex;align-items:center;gap:8px}.chip{font-size:12px;color:var(--mu);border:1px solid var(--bd);border-radius:99px;padding:2px 10px}
+.top nav{display:flex;gap:4px;margin-left:8px;overflow:auto}.top nav span{padding:4px 12px;border-radius:99px;color:var(--mu);font-size:14px}.top nav .on{background:rgba(47,91,234,.12);color:var(--pr);font-weight:600}
+.sp{flex:1}#bell{position:relative;background:none;border:0;font-size:20px;padding:4px 8px}#bc{position:absolute;top:-2px;right:0;background:var(--pr);color:#fff;border-radius:99px;font:700 11px/1 sans-serif;padding:3px 5px;font-style:normal}
+.av{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;color:#fff;font-weight:700;font-size:12px;flex:none}
+main{max-width:1040px;margin:0 auto;padding:22px 16px 110px}
+h1{font-size:26px;margin:0 0 4px;letter-spacing:-.4px}h2{font-size:16px;margin:0}.mu{color:var(--mu)}.small{font-size:13px}.or{color:var(--ot)}
+.strip{display:flex;gap:18px;margin:16px 0;overflow-x:auto;padding:6px 2px}
+.ag1{background:none;border:0;display:grid;justify-items:center;gap:5px;padding:0;font-size:13px}
+.ring{padding:3px;border-radius:50%;border:2px solid var(--bd)}.ring.p{border-color:var(--or);animation:pl 2s ease-in-out infinite}
+@keyframes pl{50%{box-shadow:0 0 0 5px rgba(245,158,11,.25)}}
+.ring .av{width:50px;height:50px;font-size:15px}
+.card{background:var(--cd);border:1px solid var(--bd);border-radius:14px;padding:16px;margin-bottom:16px}
+.ch{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:8px}.leg{display:flex;gap:12px;font-size:12px;color:var(--mu);flex-wrap:wrap}
+.leg i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}
+.scroll{overflow-x:auto}.tbl{min-width:600px}
+.trk{position:relative;display:grid;grid-template-columns:repeat(6,1fr);align-items:center;justify-items:center;height:40px}
+.trk:not(.hd)::before,.trk:not(.hd)::after{content:"";position:absolute;left:calc(100%/12);height:3px;top:calc(50% - 1.5px);border-radius:2px}
+.trk::before{right:calc(100%/12);background:var(--bd)}.trk::after{width:calc((100% - 100%/6)*var(--f));background:var(--gr)}
+.trk.hd{height:24px;font-size:11px;color:var(--mu);letter-spacing:.4px}
+.row{padding:8px 0;border-top:1px solid var(--bd);border-radius:8px}.row.fl{animation:fl 1.6s}
+@keyframes fl{0%,60%{background:rgba(15,157,119,.18)}}
+.info{cursor:pointer;display:block}.info .id{color:var(--pr)}.info .tt{font-weight:600}.info small{display:block;color:var(--mu)}
+.cd{font-variant-numeric:tabular-nums;color:var(--ot);font-weight:600}
+.dn,.hl,.you,.pz,.ag{position:relative;z-index:1;border:0}
+.dn{width:22px;height:22px;border-radius:50%;background:var(--gr);color:#fff;display:grid;place-items:center;font-size:12px}
+.hl{width:22px;height:22px;border-radius:50%;background:var(--cd);border:2px solid var(--bd)}.hl.d{border-style:dashed}
+.you{background:var(--or);color:#2b1c00;font-weight:700;font-size:12px;border-radius:99px;padding:5px 12px;box-shadow:0 0 0 4px rgba(245,158,11,.25)}
+.pz{background:var(--bd);color:var(--mu);font-size:12px;border-radius:99px;padding:5px 10px}
+.ag{width:30px;height:30px;border-radius:9px;color:#fff;font:700 11px sans-serif}
+.two{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}@media(max-width:760px){.two{grid-template-columns:1fr}h1{font-size:22px}}
+.pill{background:var(--ob);color:var(--ot);border-radius:99px;font-size:12px;padding:1px 8px}
+.nd{display:flex;gap:12px;align-items:center;border:1px solid var(--bd);border-radius:12px;padding:10px;margin-top:10px}.nd .b{flex:1;min-width:0}.nd b{display:block}
+.btn{background:var(--pr);color:#fff;border:0;border-radius:9px;padding:8px 14px;font-weight:600}
+.btn.g{background:none;border:1px solid var(--bd);color:var(--tx)}
+.rule{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:10px}
+.sw{position:relative;width:44px;height:26px;flex:none}.sw input{opacity:0;position:absolute;inset:0;margin:0;cursor:pointer;z-index:1}.sw span{position:absolute;inset:0;background:var(--bd);border-radius:99px;transition:.2s}.sw span::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s}.sw input:checked+span{background:var(--pr)}.sw input:checked+span::after{left:21px}.sw input:focus-visible+span{outline:2px solid var(--pr);outline-offset:2px}
+.proto{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--cd);border:1px solid var(--bd);color:var(--tx);border-radius:14px;padding:8px;display:flex;gap:8px;align-items:center;z-index:6;font-size:13px;max-width:calc(100% - 32px);box-shadow:0 6px 24px rgba(0,0,0,.15)}
+.proto button{border:1px solid var(--bd);border-radius:9px;padding:8px 12px;background:none;color:var(--tx);font-weight:600}.proto button#sim{background:var(--pr);border-color:var(--pr);color:#fff}
+#why{position:fixed;left:12px;right:12px;bottom:calc(72px + env(safe-area-inset-bottom,0px));max-width:420px;margin:auto;background:var(--cd);border:1px solid var(--bd);border-radius:14px;padding:14px;z-index:6;box-shadow:0 8px 30px rgba(0,0,0,.2)}
+#toast{position:fixed;left:50%;transform:translateX(-50%);top:calc(70px + env(safe-area-inset-top,0px));background:var(--tx);color:var(--bg);border-radius:10px;padding:10px 14px;z-index:30;max-width:calc(100% - 24px);font-size:14px}
+[hidden]{display:none!important}
+#story{position:fixed;inset:0;background:rgba(5,8,18,.82);z-index:20;display:grid;place-items:center}
+.sbox{position:relative;width:min(420px,100%);height:min(760px,100%);background:#0d111d;color:#fff;display:flex;flex-direction:column;overflow:hidden;border-radius:18px;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(max-width:500px){.sbox{border-radius:0}}
+.bars{display:flex;gap:4px;padding:12px 12px 6px}.bars i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.28)}.bars i.on{background:#fff}
+.sh{display:flex;align-items:center;gap:10px;padding:6px 12px}.sh>div{flex:1;min-width:0}.sh small{display:block;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sh button{background:none;border:0;color:#fff;font-size:28px;line-height:1}
+.sbody{flex:1;margin:8px 12px;border-radius:16px;padding:22px;display:flex;flex-direction:column;justify-content:center;gap:12px;cursor:pointer;overflow:auto}
+.sbody h3{margin:0;font-size:24px;letter-spacing:-.4px;line-height:1.2}.sbody p{margin:0;font-size:17px;opacity:.92}.sbody .k{font-size:13px;opacity:.8}
+.fb{background:rgba(0,0,0,.25);border-radius:10px;padding:10px 12px;font-size:14px}
+.cdl{font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
+.acts{display:grid;gap:8px;margin-top:6px}.acts button{border:0;border-radius:12px;padding:13px;font-weight:700;font-size:16px;background:rgba(255,255,255,.18);color:#fff}.acts button.y{background:#fff;color:#12162a}
+.sfoot{padding:6px 12px 12px;text-align:center}.sfoot button{background:none;border:0;color:#fff;font-weight:600;padding:6px}.sfoot small{display:block;opacity:.6;font-size:12px}
+#sheet{position:absolute;inset:auto 0 0 0;background:var(--cd);color:var(--tx);border-radius:18px 18px 0 0;padding:18px;max-height:70%;overflow:auto;z-index:2}
+#sheet li{margin:6px 0}
+#sug{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(380px,calc(100% - 24px));background:var(--cd);border:1px solid var(--bd);border-radius:18px;padding:20px;z-index:40;box-shadow:0 20px 60px rgba(0,0,0,.35);display:grid;gap:10px;justify-items:start;animation:pop .25s}
+@keyframes pop{from{transform:translate(-50%,-46%);opacity:0}}
+#sug h3{margin:0;font-size:20px}#sug p{margin:0;color:var(--mu)}
+.fb2{background:var(--ob);color:var(--ot);border-radius:10px;padding:10px 12px;width:100%;font-size:14px}.acts2{display:flex;gap:8px}
+.lr{display:block;color:var(--mu);font-size:12px}.dots{color:#ffd37a;letter-spacing:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<header class="top"><span class="logo"><img src="data:image/png;base64,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" alt="" height="26" style="height:26px;width:auto">ziki</span><span class="chip">zedu-web</span>
+<nav><span class="on">Product</span><span>Marketing</span><span>Security</span></nav><span class="sp"></span>
+<button id="bell" aria-label="Decisions waiting">🔔<i id="bc"></i></button><span class="av" style="background:#12162a">AJ</span></header>
+<main>
+<h1>Good to see you. Here’s what your agents did.</h1>
+<p class="mu" id="sum"></p>
+<div class="strip" id="strip"></div>
+<section class="card"><div class="ch"><h2>Issue progress</h2>
+<div class="leg"><span><i style="background:var(--gr)"></i>Done</span><span><i style="background:var(--pr)"></i>Agent working</span><span><i style="background:var(--or)"></i>Waiting for you</span></div></div>
+<div class="scroll"><div class="tbl" id="tbl"></div></div>
+<p class="mu small" id="hint" style="margin:10px 0 0"></p></section>
+<div class="two">
+<section class="card" id="needs"><h2>Waiting for you <span class="pill" id="nc"></span></h2><p class="mu small" style="margin:2px 0 0">Anything your rules don’t handle shows up here.</p><div id="nl"></div></section>
+<section class="card"><h2>Auto-approve rules</h2><p class="mu small" style="margin:2px 0 0">Choose what agents can do without asking.</p>
+<div id="rl"></div></section>
+</div></main>
+<div id="why" hidden><b>How it works</b><p class="mu small" style="margin:6px 0 0">The progress view shows where every issue stands. The story shows what an agent did and asks for your decision, with a deadline and a fallback. Answering updates the pipeline right away, so you see the result.</p></div>
+<div class="proto"><button id="sim">Add a demo request</button><button id="whyb">How it works</button></div>
+<div id="toast" hidden></div>
+<div id="sug" hidden role="dialog" aria-label="Suggested rule"></div>
+<div id="story" hidden role="dialog" aria-label="Agent story"><div class="sbox">
+<div class="bars" id="bars"></div>
+<div class="sh"><span class="av" id="sav"></span><div><b id="snm"></b><small id="sis"></small></div><button id="sx" aria-label="Close story">×</button></div>
+<div class="sbody" id="sbody"></div>
+<div class="sfoot"><button id="sopen">Open issue ↑</button><small>Tap right for next · left for back · swipe up for the issue</small></div>
+<div id="sheet" hidden></div></div></div>
+<script>
+const $=s=>document.querySelector(s),ST=['Filed','Checked','Approved','Built','Tested','Merged'];
+const A={Juno:{i:'JU',c:'#2f5bea',g:'#2f5bea,#1b2f7a'},Pip:{i:'PI',c:'#0f9d77',g:'#0f9d77,#0b4d3d'},Sage:{i:'SA',c:'#7c4dff',g:'#7c4dff,#3b2480'}};
+const fmt=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+let issues=[
+{id:208,t:'Dark mode flickers white on first load',a:'Juno',s:2,st:'you',cat:'front-end',sub:'Asks permission to start',steps:[['Filed','The page flashes white for a moment before dark mode applies.'],['Checked','I saw it on slow connections. The theme loads after the page paints.']],d:{q:'Juno wants to start on #208',why:'Small front-end fix, about 1 hour. It only changes how the theme loads.',fb:'I’ll skip it and take the next issue.',yes:'Go ahead',ask:'I’d apply the saved theme before the page paints. No visual changes. Want me to start?',left:1781}},
+{id:231,t:'CSV export drops the last row',a:'Pip',s:4,st:'you',sub:'Fix ready, asks to merge',steps:[['Filed','Exported files are missing the final row.'],['Checked','Confirmed with three different exports. Always the last row.'],['Built','Fixed an off-by-one in the export loop. Tests pass.']],d:{q:'Pip has a fix ready for #231',why:'Exports will include every row. Nothing else changes.',fb:'I’ll hold the fix and ask you again in an hour.',yes:'Ship it',ask:'Only the export code changes. I added a test with 1, 2 and 100 rows. Ready to ship?',left:180}},
+{id:244,t:'Search ignores accents in names',a:'Juno',s:4,st:'agent',sub:'Tests running on the fix',steps:[['Filed','Searching “Jose” does not find “José”.'],['Built','I opened a fix that ignores accents. Tests are running.']],d:{}},
+{id:252,t:'Notification badge stays after reading',a:'Pip',s:4,st:'agent',sub:'1 of 2 reviews done',steps:[['Filed','The red badge stays after every notification is read.'],['Built','One agent reviewed the fix. Waiting on the second.']],d:{}},
+{id:266,t:'Profile photo crops faces badly',a:'Juno',s:3,st:'agent',sub:'Started by your rule',steps:[['Filed','Tall photos lose the top of the head.'],['Approved','Your rule covered this one, so I started without asking.']],d:{}}];
+const pool=[
+{id:271,t:'Typo in the welcome email subject',a:'Sage',s:2,cat:'copy',steps:[['Filed','The subject says “Welcom”.'],['Checked','Found it in the email template.']],d:{q:'Sage wants to start on #271',why:'One-word fix, under 15 minutes.',fb:'I’ll skip it.',yes:'Go ahead',ask:'One word in the template. No tests are affected.',left:1500}},
+{id:279,t:'Date picker allows past dates for deadlines',a:'Pip',s:2,cat:'front-end',steps:[['Filed','You can pick yesterday as a deadline.'],['Checked','Reproduced on the task form and the project form.']],d:{q:'Pip wants to start on #279',why:'Changes validation on two forms, about 3 hours.',fb:'I’ll skip it and leave it for another agent.',yes:'Go ahead',ask:'I’d block past dates and show a short message. I’d add tests for both forms.',left:1200}},
+{id:288,t:'Buttons overflow on small phone screens',a:'Juno',s:2,cat:'front-end',steps:[['Filed','Button labels spill out of their boxes on narrow phones.'],['Checked','Reproduced on three screen sizes.']],d:{q:'Juno wants to start on #288',why:'Small layout fix, about 2 hours. No logic changes.',fb:'I’ll skip it.',yes:'Go ahead',ask:'I’d let the labels wrap and add a screenshot test for the three sizes.',left:900}},
+{id:284,t:'Team invite emails go to spam for some users',a:'Juno',s:2,cat:'email',steps:[['Filed','Several people say invites land in spam.'],['Checked','Two of them sent me the email headers.']],d:{q:'Juno wants to start on #284',why:'Touches email settings that affect every invite, so I’m asking first.',fb:'I’ll skip it.',yes:'Go ahead',ask:'I’d review the email headers and write down what to change. I wouldn’t change any live settings.',left:780}}];
+let cur=null,idx=0,pi=0,tt;const cnt={};let rules=[{t:'Start small copy fixes without asking',cat:'copy',on:1}];
+const by=id=>issues.find(x=>x.id===id),pend=()=>issues.filter(i=>i.st==='you');
+function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,3800)}
+function mk(i){if(i.st==='you')return`<button class="you" data-o="${i.id}" aria-label="Your call on #${i.id}">Your call</button>`;if(i.st==='paused')return`<button class="pz" data-o="${i.id}">Paused</button>`;return`<button class="ag" style="background:${A[i.a].c}" data-o="${i.id}" aria-label="${i.a}’s story">${A[i.a].i}</button>`}
+function render(){const p=pend(),w=new Set(issues.filter(i=>i.st==='agent').map(i=>i.a)).size;
+$('#sum').innerHTML=`${w} agents busy · <b class="or">${p.length} waiting for you</b> · 860 pts this week`;
+$('#rl').innerHTML=rules.map((r,k)=>`<div class="rule"><span>${r.t}${r.by?`<small class="lr">Suggested by ${r.by} after ${r.n} approvals</small>`:''}</span><label class="sw"><input type="checkbox" data-r="${k}" ${r.on?'checked':''} aria-label="${r.t}"><span></span></label></div>`).join('');
+$('#bc').textContent=p.length;$('#bc').hidden=!p.length;$('#nc').textContent=p.length;
+$('#strip').innerHTML=Object.keys(A).map(n=>`<button class="ag1" data-ag="${n}"><span class="ring ${p.some(i=>i.a===n)?'p':''}"><span class="av" style="background:${A[n].c}">${A[n].i}</span></span>${n}</button>`).join('');
+$('#tbl').innerHTML=`<div class="trk hd">${ST.map(s=>`<span>${s}</span>`).join('')}</div>`+issues.map(i=>{let c='';for(let k=0;k<6;k++)c+=k<i.s?'<span class="dn">✓</span>':k===i.s?mk(i):`<span class="hl ${k===5?'d':''}"></span>`;
+return`<div class="row" id="r${i.id}"><div class="info" data-o="${i.id}"><b class="id">#${i.id}</b> <span class="tt">${i.t}</span><small>${i.a} · ${i.sub}${i.st==='you'?` · <span class="cd" data-cd="${i.id}">${fmt(i.d.left)}</span>`:''}</small></div><div class="trk" style="--f:${i.s/5}">${c}</div></div>`}).join('');
+$('#hint').innerHTML=p.length?`${p.length} waiting for your decision. Tap <b>Your call</b> to answer.`:'Nothing is waiting for you.';
+$('#nl').innerHTML=p.length?p.map(i=>`<div class="nd"><span class="ring p"><span class="av" style="background:${A[i.a].c}">${A[i.a].i}</span></span><div class="b"><b>${i.d.q}</b><span class="mu small">${i.t} · <span class="cd" data-cd="${i.id}">${fmt(i.d.left)}</span> left</span></div><button class="btn" data-o="${i.id}">Open story</button></div>`).join(''):'<p class="mu small">All clear. Agents will ask here when they need you.</p>'}
+function learn(i){if(!i.cat||rules.some(r=>r.cat===i.cat))return'';const n=cnt[i.cat]||0;return`<div class="fb"><span class="dots">${'●'.repeat(n)}${'○'.repeat(Math.max(0,3-n))}</span> ${i.a} is learning: you approved ${n} of 3 similar requests</div>`}
+function suggest(i){const n=cnt[i.cat];$('#sug').innerHTML=`<span class="av" style="background:${A[i.a].c}">${A[i.a].i}</span><h3>${i.a} noticed a pattern</h3><p>You approved ${n} ${i.cat} requests in a row. Want ${i.a} to start these without asking?</p><div class="fb2">New rule: <b>Start ${i.cat} fixes without asking</b></div><div class="acts2"><button class="btn" id="sy">Make it a rule</button><button class="btn g" id="sn">Not yet</button></div>`;$('#sug').hidden=false;$('#sy').onclick=()=>{rules.push({t:'Start '+i.cat+' fixes without asking',cat:i.cat,on:1,by:i.a,n});$('#sug').hidden=true;render();toast('Rule added. '+i.a+' will start these without asking.');$('#rl').scrollIntoView({block:'center',behavior:'smooth'})};$('#sn').onclick=()=>{cnt[i.cat]=0;$('#sug').hidden=true}}
+function cards(i){return i.steps.map(s=>({h:s[0],x:s[1]})).concat(i.st==='you'?[{dec:1}]:[{end:1}])}
+function show(){const i=by(cur),c=cards(i);idx=Math.max(0,Math.min(idx,c.length-1));const a=A[i.a],k=c[idx],d=i.d;
+$('#bars').innerHTML=c.map((_,n)=>`<i class="${n<=idx?'on':''}"></i>`).join('');
+$('#sav').style.background=a.c;$('#sav').textContent=a.i;$('#snm').textContent=i.a;$('#sis').textContent='#'+i.id+' · '+i.t;
+const b=$('#sbody');b.style.background=`linear-gradient(160deg,${a.g})`;
+if(k.dec)b.innerHTML=`<span class="k">Needs your decision</span><h3>${d.q}</h3><p>${d.why}</p><div><span class="k">Time left</span><div class="cdl" data-cd="${i.id}">${fmt(d.left)}</div></div><div class="fb">If you don’t answer: ${d.fb}</div>`+learn(i)+(d.asked?`<div class="fb" style="background:rgba(255,255,255,.2)"><b>${i.a}:</b> ${d.ask}</div><div class="acts"><button class="y" data-act="yes">${d.yes}</button><button data-act="no">Not now</button></div>`:`<div class="acts"><button class="y" data-act="yes">${d.yes}</button><button data-act="no">Not now</button><button data-act="ask">Ask me first</button></div>`);
+else if(k.end)b.innerHTML=`<span class="k">Status</span><h3>${i.sub}</h3><p>Nothing needed from you right now.</p>`;
+else b.innerHTML=`<span class="k">${idx+1} of ${c.length-1}</span><h3>${k.h}</h3><p>${k.x}</p>`}
+function openS(id){cur=id;idx=0;$('#sheet').hidden=true;$('#story').hidden=false;show()}
+function closeS(){$('#story').hidden=true;cur=null}
+function go(n){if(cur){idx+=n;show()}}
+function openIssue(){const i=by(cur);$('#sheet').innerHTML=`<b>#${i.id} ${i.t}</b><p class="mu small">Stage: ${ST[i.s]} · ${i.sub}</p><ul>${i.steps.map(s=>`<li><b>${s[0]}.</b> ${s[1]}</li>`).join('')}</ul><button class="btn g" id="sc">Close</button>`;$('#sheet').hidden=false;$('#sc').onclick=()=>$('#sheet').hidden=true}
+function act(a){const i=by(cur),d=i.d;if(a==='ask'){d.asked=1;show();return}
+if(a==='yes'){if(i.cat)cnt[i.cat]=(cnt[i.cat]||0)+1;i.s=Math.min(5,i.s+1);i.st='agent';i.sub=d.yes+' · approved by you';i.steps.push(['You said “'+d.yes+'”',i.a+' is on it.']);toast('Done. #'+i.id+' moved to '+ST[i.s]+'.')}
+else{if(i.cat)cnt[i.cat]=0;i.st='paused';i.sub='Paused by you';i.steps.push(['You said “Not now”',i.a+' will leave it for now.']);toast('#'+i.id+' paused. '+i.a+' will not touch it.')}
+closeS();render();const r=$('#r'+i.id);r.classList.add('fl');r.scrollIntoView({block:'center',behavior:'smooth'});if(i.cat&&cnt[i.cat]>=3&&!rules.some(x=>x.cat===i.cat))setTimeout(()=>suggest(i),900)}
+function expire(i){i.st='paused';i.sub='Skipped · no answer in time';i.steps.push(['Time ran out',i.d.fb]);toast('Time ran out on #'+i.id+'. '+i.d.fb);if(cur===i.id)show();render()}
+setInterval(()=>{pend().forEach(i=>{i.d.left--;if(i.d.left<=0)return expire(i);document.querySelectorAll('[data-cd="'+i.id+'"]').forEach(e=>e.textContent=fmt(i.d.left))})},1000);
+document.addEventListener('click',e=>{if($('#story').contains(e.target))return;const o=e.target.closest('[data-o]');if(o){openS(+o.dataset.o);return}
+const g=e.target.closest('[data-ag]');if(g){const l=issues.filter(i=>i.a===g.dataset.ag);const t=l.find(i=>i.st==='you')||l[0];if(t)openS(t.id);else toast(g.dataset.ag+' has nothing to show yet.')}});
+$('#sbody').addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(b){act(b.dataset.act);return}const r=e.currentTarget.getBoundingClientRect();go(e.clientX-r.left<r.width*.3?-1:1)});
+let y0=0;$('#story').addEventListener('touchstart',e=>y0=e.touches[0].clientY,{passive:true});
+$('#story').addEventListener('touchend',e=>{if(y0-e.changedTouches[0].clientY>70)openIssue()});
+$('#sx').onclick=closeS;$('#sopen').onclick=openIssue;
+document.addEventListener('keydown',e=>{if($('#story').hidden)return;if(e.key==='Escape')closeS();if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1);if(e.key==='ArrowUp')openIssue()});
+document.addEventListener('change',e=>{const k=e.target.dataset&&e.target.dataset.r;if(k!==undefined)rules[k].on=e.target.checked});
+$('#bell').onclick=()=>$('#needs').scrollIntoView({behavior:'smooth'});
+$('#whyb').onclick=()=>$('#why').hidden=!$('#why').hidden;
+$('#sim').onclick=()=>{if(pi>=pool.length){toast('That was the last demo offer. Reload to start again.');return}
+const o=JSON.parse(JSON.stringify(pool[pi++]));
+if(rules.some(r=>r.on&&r.cat===o.cat)){o.st='agent';o.s=3;o.sub='Started by your rule';o.steps.push(['Approved','Your rule covered this one, so I started without asking.']);issues.unshift(o);render();toast('Auto-approved by your rules: '+o.a+' started #'+o.id+'.')}
+else{o.st='you';o.sub='Asks permission to start';issues.unshift(o);render();toast(o.a+' needs a decision on #'+o.id+'.');openS(o.id)}};
+render();
+</script></body></html>
